@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -12,15 +12,7 @@ export class PokemonDirectoryComponent implements OnInit {
   pokemon: any;
   page: any;
   pagesArray: any;
-  nextPage() {
-    throw new Error('Method not implemented.');
-  }
-  changePage(_t14: any) {
-    throw new Error('Method not implemented.');
-  }
-  previousPage() {
-    throw new Error('Method not implemented.');
-  }
+
   pokemonList: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 50;
@@ -29,7 +21,7 @@ export class PokemonDirectoryComponent implements OnInit {
 
   queryParamsSubject: Subject<any> = new Subject<any>();
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((queryParams) => {
@@ -58,6 +50,16 @@ export class PokemonDirectoryComponent implements OnInit {
           { length: this.totalPages },
           (_, i) => i + 1
         );
+
+        this.router.navigate(['/pokemon-directory'], {
+          queryParams: { page: this.currentPage },
+          replaceUrl: true,
+        });
       });
+  }
+
+  nextPage() {
+    this.currentPage++;
+    this.fetchPokemonList();
   }
 }
