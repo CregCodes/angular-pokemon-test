@@ -23,17 +23,6 @@ export class PokemonDirectoryComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((queryParams) => {
-      this.queryParamsSubject.next(queryParams);
-    });
-
-    this.queryParamsSubject.subscribe((queryParams) => {
-      this.currentPage = queryParams.page || 1;
-      this.fetchPokemonList();
-    });
-  }
-
   fetchPokemonList() {
     const offset = (this.currentPage - 1) * this.itemsPerPage;
     const limit = this.itemsPerPage;
@@ -56,6 +45,16 @@ export class PokemonDirectoryComponent implements OnInit {
           replaceUrl: true,
         });
       });
+  }
+
+  ngOnInit(): void {
+    this.fetchPokemonList();
+    this.route.queryParams.subscribe((queryParams) => {
+      this.queryParamsSubject.next(queryParams);
+    });
+    this.queryParamsSubject.subscribe((queryParams) => {
+      this.currentPage = queryParams.page || 1;
+    });
   }
 
   nextPage() {

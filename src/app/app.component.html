@@ -1,9 +1,14 @@
-<!-- <router-outlet>
-  <nav>
-    <ul>
-      <li><a routerLink="/pokemon-directory">Pokemon Directory</a></li>
-    </ul>
-  </nav>
-</router-outlet> -->
-
-<app-pokemon-directory></app-pokemon-directory>
+<h1>Welcome to PokeDex</h1>
+<nav>
+  <ul>
+    <li>
+      <a
+        routerLinkActive="activebutton"
+        class="button"
+        routerLink="/pokemon-directory"
+        >Ok then, I suppose we should catch them all...</a
+      >
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
