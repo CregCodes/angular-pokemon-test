@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -12,15 +12,7 @@ export class PokemonDirectoryComponent implements OnInit {
   pokemon: any;
   page: any;
   pagesArray: any;
-  nextPage() {
-    throw new Error('Method not implemented.');
-  }
-  changePage(_t14: any) {
-    throw new Error('Method not implemented.');
-  }
-  previousPage() {
-    throw new Error('Method not implemented.');
-  }
+
   pokemonList: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 50;
@@ -29,18 +21,7 @@ export class PokemonDirectoryComponent implements OnInit {
 
   queryParamsSubject: Subject<any> = new Subject<any>();
 
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((queryParams) => {
-      this.queryParamsSubject.next(queryParams);
-    });
-
-    this.queryParamsSubject.subscribe((queryParams) => {
-      this.currentPage = queryParams.page || 1;
-      this.fetchPokemonList();
-    });
-  }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   fetchPokemonList() {
     const offset = (this.currentPage - 1) * this.itemsPerPage;
@@ -58,6 +39,27 @@ export class PokemonDirectoryComponent implements OnInit {
           { length: this.totalPages },
           (_, i) => i + 1
         );
+
+        this.router.navigate(['/pokemon-directory'], {
+          queryParams: { page: this.currentPage },
+          replaceUrl: true,
+        });
       });
+  }
+
+  ngOnInit(): void {
+    this.fetchPokemonList();
+    this.route.queryParams.subscribe((queryParams) => {
+      this.queryParamsSubject.next(queryParams);
+    });
+    this.queryParamsSubject.subscribe((queryParams) => {
+      this.currentPage = queryParams.page || 1;
+      this.fetchPokemonList();
+    });
+  }
+
+  nextPage() {
+    this.currentPage++;
+    this.fetchPokemonList();
   }
 }
