@@ -20,6 +20,7 @@ export class PokemonDirectoryComponent implements OnInit {
   totalPages: number = 0;
 
   queryParamsSubject: Subject<any> = new Subject<any>();
+  pokemonId: string | null = null;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -50,12 +51,14 @@ export class PokemonDirectoryComponent implements OnInit {
   ngOnInit(): void {
     this.fetchPokemonList();
     this.route.queryParams.subscribe((queryParams) => {
-      this.queryParamsSubject.next(queryParams);
-    });
-    this.queryParamsSubject.subscribe((queryParams) => {
-      this.currentPage = queryParams.page || 1;
+      this.currentPage = queryParams['page'] || 1;
       this.fetchPokemonList();
     });
+  }
+
+  getPokemonId(url: string): string {
+    const urlParts = url.split('/');
+    return urlParts[urlParts.length - 2];
   }
 
   nextPage() {

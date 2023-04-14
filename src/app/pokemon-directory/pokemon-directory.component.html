@@ -33,7 +33,9 @@
   <p>You are here: Page {{ currentPage }}</p>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let pokemon of pokemonList">
-      <a [routerLink]="['/pokemon', pokemon.id]">{{ pokemon.name }}</a>
+      <a [routerLink]="['/pokemon', getPokemonId(pokemon.url)]"
+        >{{ pokemon.name }}
+      </a>
     </li>
   </ul>
 </div>

@@ -11,6 +11,7 @@ export class PokemonDetailsComponent implements OnInit {
   pokemon: any;
 
   constructor(route: ActivatedRoute) {
+    console.log(route, 'this is the route');
     this.pokemonId = route.snapshot.params['id'];
   }
 
@@ -26,6 +27,9 @@ export class PokemonDetailsComponent implements OnInit {
         console.log('this is the Pokemon DETAILS', data);
         console.log("You caught a Pokemon ('s details)?");
         this.pokemon = data;
+      })
+      .catch((error) => {
+        console.log('Error fetching the details mate', error);
       });
   }
 }
