@@ -54,6 +54,7 @@ export class PokemonDirectoryComponent implements OnInit {
     });
     this.queryParamsSubject.subscribe((queryParams) => {
       this.currentPage = queryParams.page || 1;
+      this.fetchPokemonList();
     });
   }
 
