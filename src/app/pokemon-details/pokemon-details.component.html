@@ -1,21 +1,22 @@
-<div class="container">
+<div class="container global-styles">
   <h2>{{ pokemon.name }}</h2>
   <img
     [src]="pokemon.sprites.front_default"
     alt="{{ pokemon.name }}"
     class="img-circle"
   />
-  <p>Height: {{ pokemon.height }}</p>
-  <p>Weight: {{ pokemon.weight }}</p>
+  <p class="poke-stats">Height: {{ pokemon.height }}</p>
+  <p class="poke-stats">Weight: {{ pokemon.weight }}</p>
   <h3>Abilities:</h3>
-  <ul>
-    <li *ngFor="let ability of pokemon.abilities">
-      {{ ability.ability.name }}
-    </li>
-  </ul>
+
+  <p class="poke-abilities" *ngFor="let ability of pokemon.abilities">
+    {{ ability.ability.name }}
+  </p>
+  <br />
   <a
     routerLinkActive="activebutton"
     class="button"
+    style="font-size: x-large"
     routerLink="/pokemon-directory"
     >Take Me Back</a
   >
