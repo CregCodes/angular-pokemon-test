@@ -1,1 +1,30 @@
 @import "bootstrap/scss/bootstrap";
+
+.global-styles {
+  font-family: monospace;
+  background-color: yellow;
+  align-self: stretch;
+}
+
+.page-location {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 16px;
+}
+
+.poke-stats {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.poke-abilities {
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 3px;
+}

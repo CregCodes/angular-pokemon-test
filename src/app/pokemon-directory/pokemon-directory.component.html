@@ -1,8 +1,17 @@
-<div class="container">
+<div class="container global-styles">
   <h1>Pokemon Directory</h1>
   <p>Choose Your Pokemon!</p>
   <nav aria-label="Page navigation">
-    <ul class="pagination">
+    <ul
+      class="pagination"
+      style="
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-content: stretch;
+      "
+    >
       <li class="page-item" [ngClass]="{ disabled: currentPage === 1 }"></li>
       <li
         class="page-item"
@@ -30,8 +39,8 @@
     </button>
   </nav>
   <br />
-  <p>You are here: Page {{ currentPage }}</p>
-  <ul class="list-group">
+  <p class="page-location">You are here: Page {{ currentPage }}</p>
+  <ul class="list-group" style="border: 1px solid grey">
     <li class="list-group-item" *ngFor="let pokemon of pokemonList">
       <a [routerLink]="['/pokemon', getPokemonId(pokemon.url)]"
         >{{ pokemon.name }}
